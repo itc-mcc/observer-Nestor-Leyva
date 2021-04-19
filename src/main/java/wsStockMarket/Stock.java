@@ -3,29 +3,29 @@ import java.util.*;
 
 public class Stock implements Subject
 {
-	String tipo;
-	StockMarket stockMkt;
-	ArrayList<Observer> observer;
+	String tipo; //Nombre del stock
+	StockMarket mercado_acciones;
+	ArrayList<Observer> observers;
 	double precio;
 
 	public Stock(String tipo, double precio_inicial, StockMarket mercado_acciones)
 	{
-		this.stockMkt = mercado_acciones;
+		this.mercado_acciones = mercado_acciones;
 		this.precio = precio_inicial;
 		this.tipo = tipo;
-		observer = new ArrayList<>();
+		observers = new ArrayList<>();
 	}
-
-	public void registrarObs(Observer obs) {observer.add(obs);}
-
-	public String notificarObs(Observer obst, String transType, Double precio)
+	@Override
+	public void registrarObs(Observer obs) {observers.add(obs);}
+	@Override
+	public String notificarObs(Observer t, String tipo_transaccion, Double precio)
 	{
 		StringBuilder trans = new StringBuilder();
-		if (obst instanceof Trader)
+		if (t instanceof Trader)
 		{
-			for (Observer observer : observer)
+			for (Observer observer : observers)
 			{
-				trans.append(observer.getName()).append(":The latest trade is Trader:").append(obst.getName()).append(" ").append(transType).append(" $").append(precio).append(" Stock: ").append(this.tipo).append("\n");
+				trans.append(observer.getName()).append(":The latest trade is Trader:").append(t.getName()).append(" ").append(tipo_transaccion).append(" $").append(precio).append(" Stock: ").append(this.tipo).append("\n");
 			}
 		}
 		return trans.substring(0,trans.length()- 1);
