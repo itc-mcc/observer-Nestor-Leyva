@@ -1,5 +1,3 @@
 package wsStockMarket;
 
-public interface Observer {
-
-}
+public interface Observer{String getName();}
