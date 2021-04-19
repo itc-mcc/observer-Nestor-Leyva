@@ -4,12 +4,14 @@ import java.util.*;
 public class Trader implements Observer
 {
 	String name;
-	Map<Stock,Double> stonks;
+	StockMarket mercado_acciones;
+	private Map<Stock,Double> stonks;
 
 	public Trader(String nombre, StockMarket mercado_acciones)
 	{
-		stonks = new HashMap<>();
-		name = nombre;
+		this.stonks = new HashMap<>();
+		this.name = nombre;
+		this.mercado_acciones = mercado_acciones;
 	}
 
 	public String getName() {return this.name;}
